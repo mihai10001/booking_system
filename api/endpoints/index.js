@@ -4,6 +4,7 @@ const verifyAdminMiddleware = require('../middlewares/verifyAdminRole').verifyAd
 const { login, register } = require('../controllers/users');
 const { getEvents, getEvent, createEvent, updateEvent, deleteEvent } = require('../controllers/events');
 const { getTickets, getTicket, createTicket, updateTicket, deleteTicket } = require('../controllers/tickets');
+const { getReviews, createReview } = require('../controllers/reviews');
 
 module.exports = function(app, dbClient) {
 
@@ -61,6 +62,17 @@ module.exports = function(app, dbClient) {
 
     app.delete('/tickets/:ticketId', verifyJWTMiddleware, verifyAdminMiddleware, (req, res) => {
       deleteTicket(req, res, dbClient);
+    });
+
+
+    // Reviews
+
+    app.get('/reviews/:eventId', verifyJWTMiddleware, (req, res) => {
+      getReviews(req, res, dbClient);
+    });
+
+    app.post('/reviews/:eventId', verifyJWTMiddleware, (req, res) => {
+      createReview(req, res, dbClient);
     });
 
 };
