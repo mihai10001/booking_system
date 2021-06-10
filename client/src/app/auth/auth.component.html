@@ -1,0 +1,41 @@
+<br><br><br><br>
+
+<mat-card class="my-card">
+  <h1>{{ isRegister ? 'Creează cont' : 'Conectează-te' }}</h1>
+  <form [formGroup]="userForm" (ngSubmit)="submitForm()" autocomplete="off">
+
+    <mat-error *ngIf="this.registerError">{{this.registerError}}</mat-error>
+
+    <mat-form-field>
+      <mat-label>E-mail</mat-label>
+      <input matInput formControlName="email" id="email" placeholder="E-mail">
+      <mat-error *ngIf="userForm.get('email').hasError('required')">Obligatoriu</mat-error>
+      <mat-error *ngIf="userForm.get('email').hasError('email')">Format e-mail greșit</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Parolă</mat-label>
+      <input matInput type="password" formControlName="password" id="password" placeholder="Parolă">
+      <mat-error *ngIf="userForm.get('password').touched && userForm.get('password').hasError('required')">Obligatoriu</mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="isRegister">
+      <mat-label>Nume</mat-label>
+      <input matInput formControlName="name" id="name" placeholder="Nume">
+    </mat-form-field>
+
+    <div class="text-center">
+      <button mat-flat-button color="primary" type="submit" [disabled]="userForm.invalid">Logare</button>
+    </div>
+  </form>
+
+  <div class="text-center margin-top-3" *ngIf="!isRegister">
+    Nu ai cont?
+    <button mat-button color="warn" style="padding: 0px" (click)="switchRegister()">Înregistrează-te</button>
+  </div>
+
+  <div class="text-center margin-top-3" *ngIf="isRegister">
+    Ai deja cont?
+    <button mat-button style="padding: 0px" class="success-green" (click)="switchRegister()">Loghează-te</button>
+  </div>
+</mat-card>
