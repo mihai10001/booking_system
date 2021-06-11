@@ -1,0 +1,18 @@
+<mat-drawer-container class="example-container mat-typography" autosize>
+    <mat-drawer #drawer mode="side" disableClose="true" opened="true">
+      <button mat-mini-fab (click)="isExpanded = !isExpanded" color="primary" style="margin: 10px;">
+        <mat-icon aria-label="Menu">menu</mat-icon>
+      </button>
+  
+      <mat-nav-list>
+        <a mat-list-item routerLink="/events/list">
+          <mat-icon mat-list-icon>dns</mat-icon>
+          <h4 mat-line *ngIf="isExpanded">Evenimente</h4>
+        </a>
+      </mat-nav-list>
+    </mat-drawer>
+  
+    <div class="example-sidenav-content">
+        <router-outlet></router-outlet>
+    </div>
+</mat-drawer-container>

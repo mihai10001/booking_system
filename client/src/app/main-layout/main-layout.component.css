@@ -1,0 +1,10 @@
+.example-container {
+    height: 100%;
+}
+
+.title-divider {
+    color: gray;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 0px;
+}
