@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StarRatingModule } from '@sreyaj/ng-star-rating';
+
+import { MainLayoutRoutingModule } from './main-layout-routing.module';
 import { MainLayoutComponent } from './main-layout.component';
 import { EventsPage } from './events/events.page';
 
@@ -12,6 +14,7 @@ import { EventsPage } from './events/events.page';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    MainLayoutRoutingModule,
     StarRatingModule
   ],
   declarations: [
