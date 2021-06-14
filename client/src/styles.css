@@ -18,10 +18,16 @@ body { background-color: #d3d3d3; }
     margin-top: 0.75rem;
 }
 
-.my-card {
+.login-card {
     margin: auto;
     width: 20%;
 }
+
+@media screen and (max-width: 960px) {
+    .login-card  {
+      width: 80%;
+    }
+  }
 
 .success-green {
     color: #7cfc00;
@@ -29,4 +35,19 @@ body { background-color: #d3d3d3; }
 
 .success-blue {
     color: #1E90FF;
+}
+
+.my-dialog-container .mat-dialog-container {
+    padding: 0px;
+}
+
+.my-dialog-container .mat-dialog-container {
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.my-dialog-container .mat-dialog-container::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
 }
