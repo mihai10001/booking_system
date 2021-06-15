@@ -11,8 +11,7 @@
 }
 
 .example-card {
-   display: inline-block;
-   max-width: 250px;
+   width: 250px;
    margin: 20px;
  }
  
