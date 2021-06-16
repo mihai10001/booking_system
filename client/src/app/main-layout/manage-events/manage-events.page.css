@@ -1,0 +1,31 @@
+.title-margin {
+   margin: 20px;
+   margin-top: 30px;
+   margin-bottom: 5px;
+}
+
+.subtitle-margin {
+   margin: 0px;
+   margin-left: 20px;
+   margin-bottom: 5px;
+   color: gray;
+}
+
+.my-table-card {
+   margin: auto;
+   margin: 20px;
+   margin-top: 0px;
+}
+
+.mat-column-image_url {
+   flex: none;
+   width: 170px;
+}
+
+.truncate-cell {
+   padding-right: 20px;
+   max-width: 200px; /* feel free to include any other value */
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
