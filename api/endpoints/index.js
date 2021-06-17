@@ -75,4 +75,10 @@ module.exports = function(app, dbClient) {
       createReview(req, res, dbClient);
     });
 
+
+    // Test endpoint (ping)
+    app.post('/today', (req, res) => {
+      res.status(202).send({date: new Date()});
+    });
+
 };
