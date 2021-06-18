@@ -77,7 +77,8 @@ module.exports = function(app, dbClient) {
 
 
     // Test endpoint (ping)
-    app.post('/today', (req, res) => {
+
+    app.get('/today', (req, res) => {
       res.status(202).send({date: new Date()});
     });
 
