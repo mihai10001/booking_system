@@ -1,0 +1,33 @@
+<h1 class="mat-display-1 title-margin">Contul meu</h1>
+<h3 class="mat-subheading-3 subtitle-margin">Modifică datele contului</h3>
+
+<form [formGroup]="userForm" (ngSubmit)="submitForm()" autocomplete="off" class="form-margin">
+    <div style="margin-bottom: 15px">
+      <button mat-flat-button color="primary" type="submit" [disabled]="userForm.invalid">Salvează</button>
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input matInput formControlName="email" id="email" placeholder="E-mail">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nume</mat-label>
+      <input matInput formControlName="name" id="name" placeholder="Nume">
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+    <h3 class="mat-subheading-3 subtitle-2-margin">Modifică parola</h3>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Parola nouă</mat-label>
+      <input matInput type="password" formControlName="new_password" id="new_password" placeholder="Parola nouă">
+      <mat-error *ngIf="userForm.get('new_password').touched && userForm.get('new_password').hasError('required')">Obligatoriu</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Confirmă parola nouă</mat-label>
+      <input matInput type="password" formControlName="confirm_new_password" id="confirm_new_password" placeholder="Confirmă parola nouă">
+      <mat-error *ngIf="userForm.get('confirm_new_password').touched && userForm.get('confirm_new_password').hasError('required')">Obligatoriu</mat-error>
+    </mat-form-field>
+</form>
