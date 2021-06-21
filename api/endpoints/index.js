@@ -1,10 +1,11 @@
 const verifyJWTMiddleware = require('../middlewares/verifyJWT').verifyJWT;
 const verifyAdminMiddleware = require('../middlewares/verifyAdminRole').verifyAdminRole;
 
-const { login, register } = require('../controllers/users');
+const { login, register, getUser, updateUser } = require('../controllers/users');
 const { getEvents, getEvent, createEvent, updateEvent, deleteEvent } = require('../controllers/events');
 const { getTickets, getTicket, createTicket, updateTicket, deleteTicket } = require('../controllers/tickets');
 const { getReviews, createReview } = require('../controllers/reviews');
+
 
 module.exports = function(app, dbClient) {
 
@@ -16,6 +17,14 @@ module.exports = function(app, dbClient) {
 
     app.post('/login', (req, res) => {
       login(req, res, dbClient);
+    });
+
+    app.get('/profile', verifyJWTMiddleware, (req, res) => {
+      getUser(req, res, dbClient);
+    });
+
+    app.put('/profile', verifyJWTMiddleware, (req, res) => {
+      updateUser(req, res, dbClient);
     });
 
 
