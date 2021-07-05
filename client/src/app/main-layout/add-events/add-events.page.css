@@ -1,0 +1,27 @@
+mat-form-field {
+    width: 100%;
+}
+
+.form-margin {
+    margin: 20px;
+    width: 50%;
+}
+
+@media screen and (max-width: 769px) {
+    .form-margin {
+      width: 80%;
+    }
+}
+
+.title-margin {
+    margin: 20px;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+ 
+.subtitle-margin {
+    margin: 0px;
+    margin-left: 20px;
+    color: gray;
+}
+ 
