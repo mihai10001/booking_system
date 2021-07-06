@@ -1,0 +1,71 @@
+<h1 class="mat-display-1 title-margin">Editează evenimentul {{ editEventsForm.get('title').value }}</h1>
+<h3 class="mat-subheading-3 subtitle-margin">Completează câmpurile de mai jos</h3>
+
+<form [formGroup]="editEventsForm" (ngSubmit)="submitForm()" autocomplete="off" class="form-margin">
+    <div style="margin-bottom: 15px">
+      <button mat-flat-button color="primary" type="submit" [disabled]="editEventsForm.invalid">Salvează</button>
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Titlu</mat-label>
+      <input matInput formControlName="title" id="title" placeholder="Titlu" required>
+      <mat-error *ngIf="editEventsForm.get('title').touched && editEventsForm.get('title').hasError('required')">Obligatoriu</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Descriere</mat-label>
+      <input matInput formControlName="description" id="description" placeholder="Descriere" required>
+      <mat-error *ngIf="editEventsForm.get('description').touched && editEventsForm.get('description').hasError('required')">Obligatoriu</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Oraș</mat-label>
+      <mat-select formControlName="city" required>
+        <mat-option *ngFor="let city of romanianCities" [value]="city">
+          {{city}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="editEventsForm.get('city').touched && editEventsForm.get('city').hasError('required')">Obligatoriu</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Gen muzical</mat-label>
+      <mat-select formControlName="genre_type" required>
+        <mat-option *ngFor="let genre of genreTypes" [value]="genre">
+          {{genre}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="editEventsForm.get('genre_type').touched && editEventsForm.get('genre_type').hasError('required')">Obligatoriu</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Comision</mat-label>
+      <input type="number" matInput formControlName="commission_percentage" id="commission_percentage" placeholder="Comision" required>
+      <mat-error *ngIf="editEventsForm.get('commission_percentage').touched && editEventsForm.get('commission_percentage').hasError('required')">Obligatoriu</mat-error>
+      <mat-error *ngIf="editEventsForm.get('commission_percentage').touched && editEventsForm.get('commission_percentage').hasError('min')">Comisionul nu poate fi mai mic de 0</mat-error>
+      <mat-error *ngIf="editEventsForm.get('commission_percentage').touched && editEventsForm.get('commission_percentage').hasError('max')">Comisionul nu poate fi mai mare de 100</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Imagine (URL)</mat-label>
+      <input matInput formControlName="image_url" id="image_url" placeholder="Imagine (URL)">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Din data</mat-label>
+      <input matInput [matDatepicker]="start_date_picker" formControlName="start_date" id="start_date" placeholder="Din data" required>
+      <mat-error *ngIf="editEventsForm.get('start_date').touched && editEventsForm.get('start_date').hasError('required')">Obligatoriu</mat-error>
+      <mat-datepicker-toggle matSuffix [for]="start_date_picker"></mat-datepicker-toggle>
+      <mat-datepicker #start_date_picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Până în data</mat-label>
+      <input matInput [matDatepicker]="end_date_picker" formControlName="end_date" id="end_date" placeholder="Până în data" required>
+      <mat-error *ngIf="editEventsForm.get('end_date').touched && editEventsForm.get('end_date').hasError('required')">Obligatoriu</mat-error>
+      <mat-datepicker-toggle matSuffix [for]="end_date_picker"></mat-datepicker-toggle>
+      <mat-datepicker #end_date_picker></mat-datepicker>
+    </mat-form-field>
+</form>
+
+<app-manage-tickets [eventId]="eventId"></app-manage-tickets>
