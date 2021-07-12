@@ -4,7 +4,7 @@ const verifyAdminMiddleware = require('../middlewares/verifyAdminRole').verifyAd
 const { login, register, getUser, updateUser } = require('../controllers/users');
 const { getEvents, getEvent, createEvent, updateEvent, deleteEvent } = require('../controllers/events');
 const { getTickets, getTicket, createTicket, updateTicket, deleteTicket } = require('../controllers/tickets');
-const { getBookings } = require('../controllers/bookings');
+const { getBookings, createBooking, updateBooking, deleteBooking } = require('../controllers/bookings');
 const { getReviews, createReview } = require('../controllers/reviews');
 
 
@@ -80,6 +80,19 @@ module.exports = function(app, dbClient) {
     app.get('/bookings', verifyJWTMiddleware, (req, res) => {
       getBookings(req, res, dbClient);
     });
+
+    app.post('/bookings/:ticketId', verifyJWTMiddleware, (req, res) => {
+      createBooking(req, res, dbClient);
+    });
+
+    app.put('/bookings/:bookingId', verifyJWTMiddleware, (req, res) => {
+      updateBooking(req, res, dbClient);
+    });
+
+    app.delete('/bookings/:bookingId', verifyJWTMiddleware, (req, res) => {
+      deleteBooking(req, res, dbClient);
+    });
+
 
     // Reviews
 

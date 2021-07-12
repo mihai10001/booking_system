@@ -1,5 +1,8 @@
 const ObjectID = require('mongodb').ObjectID;
 const sanitize = require('mongo-sanitize');
+const { pick } = require('lodash');
+const { getConnectedEmail } = require('../services/emailService');
+const bookingStatuses = require('../utils/bookingStatuses.json');
 
 
 const getBookings = (req, res, dbClient) => {
@@ -49,5 +52,67 @@ const getBookings = (req, res, dbClient) => {
 }
 
 
+const createBooking = (req, res, dbClient) => {
+    const userId = sanitize(req.userId);
+    const userEmail = sanitize(req.userEmail);
+    const ticketId = sanitize(req.params.ticketId);
+    const mailOptions = {
+        to: userEmail,
+        subject: 'Sending Email using Node.js',
+        text: 'That was easy!'
+      };
+
+    const newBookingData = {
+        ...ObjectID.isValid(userId) ? { 'user_id': ObjectID(userId) } : {},
+        ...ObjectID.isValid(ticketId) ? { 'ticket_id': ObjectID(ticketId) } : {},
+        status: bookingStatuses.pending
+    };
+
+    if (ObjectID.isValid(userId) && ObjectID.isValid(ticketId)) {
+        dbClient.collection('bookings')
+            .insertOne(newBookingData)
+            .then(entry => {
+                getConnectedEmail().sendMail(mailOptions, (error, info) => {
+                    if (!error)
+                        console.log('Email sent: ' + info.response);
+                });
+                res.status(200).send({ status: 'OK'})
+            });
+    } else {
+        res.status(400).send({status: 'MISSING_FIELDS'});
+    }
+}
+
+
+const updateBooking = (req, res, dbClient) => {
+    const bookingId = sanitize(req.params.bookingId);
+    const updateBookingStatus = sanitize(pick(req.body, 'status'));
+    const updateBookingStatuses = [bookingStatuses.confirmed, bookingStatuses.canceled];
+
+    if (ObjectID.isValid(bookingId) && updateBookingStatuses.includes(updateBookingStatus)) {
+        dbClient.collection('bookings')
+            .updateOne({ _id: ObjectID(bookingId) }, { $set: updateBookingStatus })
+            .then(entry => res.status(200).send({ status: 'OK'}));
+    } else {
+        res.status(400).send({status: 'MISSING_FIELDS'});
+    }
+}
+
+
+const deleteBooking = (req, res, dbClient) => {
+    const bookingId = sanitize(req.params.bookingId);
+
+    if (ObjectID.isValid(bookingId)) {
+        dbClient.collection('bookings')
+            .deleteOne({ _id: ObjectID(bookingId) })
+            .then(entry => res.status(204).send({ status: 'DELETED'}));
+    } else {
+        res.status(400).send({status: 'MISSING_FIELDS'});
+    }
+}
+
 
 exports.getBookings = getBookings;
+exports.createBooking = createBooking;
+exports.updateBooking = updateBooking;
+exports.deleteBooking = deleteBooking;
