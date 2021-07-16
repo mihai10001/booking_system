@@ -1,0 +1,50 @@
+  <mat-vertical-stepper #stepper>
+    <mat-step>
+      <form [formGroup]="bookingForm">
+        <ng-template matStepLabel>Alegeți tipul biletului</ng-template>
+        <mat-radio-group aria-label="Select an option" formControlName="ticketId">
+          <mat-radio-button *ngFor="let ticket of ticketsForEvent" [value]="ticket._id"
+             class="margin-top-1" (click)="setTicket(ticket._id); stepper.next()">
+            <mat-card [style.backgroundColor]="'#606060'" style="width: 300px">
+              <mat-card-title>{{ ticket.title }}</mat-card-title>
+              <mat-card-subtitle><p>{{ ticket.description }}</p></mat-card-subtitle>
+              <mat-card-content>
+                <div>Preț: {{ ticket.base_price }}</div>
+                <div>Locuri disponibile: {{ ticket.available_tickets }}</div>
+              </mat-card-content>
+            </mat-card>
+          </mat-radio-button>
+        </mat-radio-group>
+      </form>
+      <div>
+        <button mat-flat-button color="primary" matStepperNext class="margin-top-buttons">Următorul pas</button>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Confirmă</ng-template>
+      <p><b>Eveniment</b> {{ this.data?.eventTitle }}</p>
+  
+      <mat-card [style.backgroundColor]="'#606060'" style="width: 300px" *ngIf="selectedTicket">
+        <mat-card-title>{{ selectedTicket.title }}</mat-card-title>
+        <mat-card-subtitle><p>{{ selectedTicket.description }}</p></mat-card-subtitle>
+        <mat-card-content>
+          <div>Preț: {{ selectedTicket.base_price }}</div>
+          <div>Locuri disponibile: {{ selectedTicket.available_tickets }}</div>
+        </mat-card-content>
+      </mat-card>
+
+      <div class="margin-top-3">
+        <mat-hint>După confirmare, veți primi un e-mail pentru aprobarea plății.</mat-hint>
+      </div>
+
+      <div>
+        <button mat-stroked-button [style.color]="bookingForm.invalid ? 'gray': 'limegreen'" (click)="createBooking()" [disabled]="bookingForm.invalid">
+          <mat-icon style="margin-right: 3px">done</mat-icon>
+          <span style="vertical-align: -0.1rem">Confirmă</span>
+        </button>
+        <button mat-button matStepperPrevious class="margin-top-buttons" (click)="stepper.reset()">Înapoi la bilete</button>
+      </div>
+    </mat-step>
+
+  </mat-vertical-stepper>
