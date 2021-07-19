@@ -1,0 +1,47 @@
+<mat-card class="my-table-card">
+    <button mat-stroked-button (click)="createTicket()">
+        <mat-icon style="margin-right: 3px" class="success-green">add_circle</mat-icon>
+        <span style="vertical-align: -0.1rem">Adaugă bilete</span>
+    </button>
+    <table mat-table [dataSource]="tickets" style="width: 100%">
+        <ng-container matColumnDef="image_url">
+            <th mat-header-cell *matHeaderCellDef>Imagine</th>
+            <td mat-cell *matCellDef="let element"> <img [src]="element.image_url" style="max-width:150px;"/> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>Titlu</th>
+            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef>Descriere</th>
+            <td mat-cell *matCellDef="let element" class="truncate-cell"> {{element.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="base_price">
+            <th mat-header-cell *matHeaderCellDef>Preț de bază</th>
+            <td mat-cell *matCellDef="let element"> {{element.base_price}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="available_tickets">
+            <th mat-header-cell *matHeaderCellDef>Număr de bilete disponibile</th>
+            <td mat-cell *matCellDef="let element"> {{element.available_tickets}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acțiuni</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-stroked-button (click)="editTicket(element._id)" class="success-blue">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-stroked-button (click)="deleteTicket(element._id)" color="warn" style="margin-left: 15px">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</mat-card>
