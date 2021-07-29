@@ -1,0 +1,36 @@
+<!-- <mat-progress-bar color="secondary" *ngIf="isTableLoading" mode="indeterminate"
+    style="margin: auto; margin-top: 50px;">
+</mat-progress-bar> -->
+
+<h1 class="mat-display-1 title-margin">Recenziile evenimentului {{eventTitle}}</h1>
+<h3 class="mat-subheading-3 subtitle-margin">Adăugați o recenzie mai jos</h3>
+
+<div class="rating-margin" style="display: flex">
+    <p class="rating-text-margin">Media</p>
+    <ngx-star-rating [total]="5" [rating]="averageRating" [filledColor]="'#fff44f'"></ngx-star-rating>
+</div>
+
+<mat-card class="my-table-card">
+    <button mat-stroked-button (click)="createReview()">
+        <mat-icon style="margin-right: 3px; color: #fff44f">star</mat-icon>
+        <span style="vertical-align: -0.1rem">Adaugă recenzie</span>
+    </button>
+
+    <table mat-table [dataSource]="reviews" style="width: 100%">
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef>Descriere</th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="rating">
+            <th mat-header-cell *matHeaderCellDef>Rating</th>
+            <td mat-cell *matCellDef="let element">
+                <ngx-star-rating [total]="5" [rating]="element.rating" [filledColor]="'#fff44f'"></ngx-star-rating>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</mat-card>
