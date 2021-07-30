@@ -1,0 +1,29 @@
+<form [formGroup]="createEditTicketForm" (ngSubmit)="submitForm()" autocomplete="off" class="form-margin">
+  <div style="margin-bottom: 15px">
+    <button mat-flat-button color="primary" type="submit" [disabled]="createEditTicketForm.invalid">Salvează</button>
+  </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Titlu</mat-label>
+    <input matInput formControlName="title" id="title" placeholder="Titlu" required>
+    <mat-error *ngIf="createEditTicketForm.get('title').touched && createEditTicketForm.get('title').hasError('required')">Obligatoriu</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Descriere</mat-label>
+    <textarea matInput rows="3" formControlName="description" id="description" placeholder="Descriere" required></textarea>
+    <mat-error *ngIf="createEditTicketForm.get('description').touched && createEditTicketForm.get('description').hasError('required')">Obligatoriu</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Preț de bază</mat-label>
+    <input type="number" matInput formControlName="base_price" id="base_price" placeholder="Preț de bază" required>
+    <mat-error *ngIf="createEditTicketForm.get('base_price').touched && createEditTicketForm.get('base_price').hasError('required')">Obligatoriu</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Număr de bilete disponibile</mat-label>
+    <input type="number" matInput formControlName="available_tickets" id="available_tickets" placeholder="Număr de bilete disponibile" required>
+    <mat-error *ngIf="createEditTicketForm.get('available_tickets').touched && createEditTicketForm.get('available_tickets').hasError('required')">Obligatoriu</mat-error>
+  </mat-form-field>
+</form>
