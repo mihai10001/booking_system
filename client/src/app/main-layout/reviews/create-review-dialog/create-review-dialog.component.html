@@ -1,0 +1,18 @@
+<form [formGroup]="reviewForm" (ngSubmit)="submitForm()" autocomplete="off" class="form-margin">
+  <div style="margin-bottom: 15px">
+    <button mat-flat-button color="primary" type="submit" [disabled]="reviewForm.invalid">Salvează</button>
+  </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Descriere</mat-label>
+    <input matInput formControlName="description" id="description" placeholder="Descriere">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" floatLabel="always">
+    <mat-label>Rating</mat-label>
+    <ngx-star-rating [total]="5" [filledColor]="'#fff44f'" (rated)="onRate($event)"></ngx-star-rating>
+    <input matInput type="number" hidden="true" formControlName="rating" id="rating" placeholder="Rating" required>
+    <mat-error *ngIf="reviewForm.get('rating').touched && reviewForm.get('rating').hasError('required')">Obligatoriu</mat-error>
+  </mat-form-field>
+</form>
+
