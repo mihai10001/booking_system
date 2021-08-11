@@ -51,7 +51,7 @@ const createEvent = (req, res, dbClient) => {
     if (!isEmpty(newEventData)) {
         dbClient.collection('events')
             .insertOne(newEvent)
-            .then(entry => res.status(200).send({ status: 'OK'}));
+            .then(entry => res.status(200).send({ status: 'OK', eventId: entry.insertedId }));
     } else {
         res.status(400).send({status: 'MISSING_FIELDS'});
     }
