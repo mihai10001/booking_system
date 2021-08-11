@@ -9,6 +9,34 @@
           <mat-icon mat-list-icon>dns</mat-icon>
           <h4 mat-line *ngIf="isExpanded">Evenimente</h4>
         </a>
+
+        <a mat-list-item routerLink="/bookings">
+          <mat-icon mat-list-icon>book</mat-icon>
+          <h4 mat-line *ngIf="isExpanded">Rezervările mele</h4>
+        </a>
+
+        <a mat-list-item routerLink="/profile">
+          <mat-icon mat-list-icon>account_box</mat-icon>
+          <h4 mat-line *ngIf="isExpanded">Contul meu</h4>
+        </a>
+
+        <a mat-list-item routerLink="/login">
+          <mat-icon mat-list-icon>logout</mat-icon>
+          <h4 mat-line *ngIf="isExpanded">Delogare</h4>
+        </a>
+
+        <mat-divider></mat-divider>
+        <h4 class="title-divider" *ngIf="isExpanded">Admin</h4>
+
+        <a mat-list-item routerLink="/events/add">
+          <mat-icon mat-list-icon>add_circle_outline</mat-icon>
+          <h4 mat-line *ngIf="isExpanded">Adaugă evenimente</h4>
+        </a>
+
+        <a mat-list-item routerLink="/events/manage">
+          <mat-icon mat-list-icon>list_alt</mat-icon>
+          <h4 mat-line *ngIf="isExpanded">Administrează evenimente</h4>
+        </a>
       </mat-nav-list>
     </mat-drawer>
   
