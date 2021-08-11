@@ -14,6 +14,9 @@ let verifyJWT = (req, res, next) => {
       return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
     else {
       // At this point, we are authenticated
+      req.userId = decoded.id;
+      req.userEmail = decoded.email;
+      req.userRole = decoded.role;
       next();
     }
   });
