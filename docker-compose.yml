@@ -1,0 +1,13 @@
+version: '3'
+services:
+  api:
+    # will build ./api/Dockerfile
+    build: ./api
+    ports:
+     - "8123:8123"
+
+  client:
+    # will build ./client/Dockerfile
+    build: ./client
+    ports:
+      - "8080:80"
